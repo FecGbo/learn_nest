@@ -1,0 +1,21 @@
+npm install -g @nestjs/cli
+
+
+for nest creat
+
+nest new projectname
+-------------------------
+npm install @nestjs/typeorm typeorm mysql2
+-----------------------------------------------------
+-built all resource c,ser,rou,migra,models
+nest g resource users
+
+---------------------------------
+dto-data transfer objects
+ui-> check dtype->
+------------------------------
+npm install --save-dev ts-node tsconfig-paths
+
+npm run build
+
+npm run typeorm migration:generate src/migrations/CreateUserTable
