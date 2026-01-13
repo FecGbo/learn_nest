@@ -8,6 +8,7 @@ nest new projectname
 npm install @nestjs/typeorm typeorm mysql2
 -----------------------------------------------------
 -built all resource c,ser,rou,migra,models
+
 nest g resource users
 
 ---------------------------------
@@ -19,3 +20,26 @@ npm install --save-dev ts-node tsconfig-paths
 npm run build
 
 npm run typeorm migration:generate src/migrations/CreateUserTable
+
+npm run typeorm migration:run
+npm run typeorm migration:revert
+
+
+
+npm run start:dev
+
+----------------------------------
+import { DataSource } from "typeorm";
+
+export const AppDataSource = new DataSource({
+  type: "mysql",
+  host: "localhost",
+  port: 3306,
+  username: "root",
+  password: "",
+  database: "cake",
+  entities: [__dirname + "/**/*.entity.{ts,js}"],
+  migrations: [__dirname + "/migrations/*.{ts,js}"],
+  synchronize: false,
+});
+----------------------------------------------------------------------------------
