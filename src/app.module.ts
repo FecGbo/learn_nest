@@ -7,6 +7,7 @@ import { UsersModule } from './users/users.module';
 import { ProductsModule } from './products/products.module';
 import { ProfilesModule } from './profiles/profiles.module';
 import { PostsModule } from './posts/posts.module';
+import { TagsModule } from './tags/tags.module';
 
 
 
@@ -25,7 +26,8 @@ import { PostsModule } from './posts/posts.module';
     UsersModule,
     ProductsModule,
     ProfilesModule,
-    PostsModule
+    PostsModule,
+    TagsModule
     ],
   controllers: [AppController],
   providers: [AppService],

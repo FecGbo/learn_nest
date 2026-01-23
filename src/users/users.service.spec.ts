@@ -33,10 +33,4 @@ describe('UsersService', () => {
     expect(result).toBeInstanceOf(Promise);
   });
 });
-  it('should create a user', async () => {
-    const userDto = { name: 'Test User', email: 'test@example.com' };
-    // Mock repo.save if needed, here we just check the method exists and returns a Promise
-    const result = service.create(userDto);
-    expect(result).toBeInstanceOf(Promise);
-  });
-});
+

@@ -1,5 +1,6 @@
+import { Tag } from "src/tags/entities/tag.entity";
 import { User } from "../../users/entities/user.entity";
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinTable, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('posts')
 export class Post {
@@ -19,6 +20,14 @@ export class Post {
     //
         @ManyToOne(()=>User,(user)=>user.posts)
         user:User
+
+
+        @ManyToMany(()=>Tag,(tag)=>tag.posts,{cascade:true})
+        @JoinTable({name:"post_tags",
+        joinColumn:{name:'postId',referencedColumnName:'id'},
+        inverseJoinColumn:{name:'tagId',referencedColumnName:'id'}
+        })
+        tags:Tag[]
 
 
 
