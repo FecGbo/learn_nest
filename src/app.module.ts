@@ -8,6 +8,7 @@ import { ProductsModule } from './products/products.module';
 import { ProfilesModule } from './profiles/profiles.module';
 import { PostsModule } from './posts/posts.module';
 import { TagsModule } from './tags/tags.module';
+import { TestBranchModule } from './test-branch/test-branch.module';
 
 
 
@@ -28,6 +29,7 @@ import { TagsModule } from './tags/tags.module';
     ProfilesModule,
     PostsModule,
     TagsModule
+    TestBranchModule
     ],
   controllers: [AppController],
   providers: [AppService],

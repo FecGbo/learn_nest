@@ -5,15 +5,17 @@ import { User } from './entities/user.entity';
 
 describe('UsersService', () => {
   let service: UsersService;
+  let mockSave: jest.Mock;
 
   beforeEach(async () => {
+    mockSave = jest.fn().mockResolvedValue({ id: 1, name: 'Test User', email: 'test@example.com' });
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         UsersService,
         {
           provide: getRepositoryToken(User),
           useValue: {
-            save: jest.fn(),
+            save: mockSave,
             // add other methods you use in UsersService if needed
           },
         },
@@ -34,3 +36,8 @@ describe('UsersService', () => {
   });
 });
 
+    const result = await service.create(userDto);
+    expect(result).toEqual({ id: 1, ...userDto });
+    expect(mockSave).toHaveBeenCalledWith(userDto);
+  });
+});
