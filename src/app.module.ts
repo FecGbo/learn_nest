@@ -5,12 +5,13 @@ import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './users/users.module';
 import { ProductsModule } from './products/products.module';
+import { ProfilesModule } from './profiles/profiles.module';
+import { PostsModule } from './posts/posts.module';
 
 
 
 @Module({
   imports: [
-  
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: 'localhost',
@@ -22,7 +23,10 @@ import { ProductsModule } from './products/products.module';
       synchronize: false,
     }),
     UsersModule,
-    ProductsModule],
+    ProductsModule,
+    ProfilesModule,
+    PostsModule
+    ],
   controllers: [AppController],
   providers: [AppService],
 })

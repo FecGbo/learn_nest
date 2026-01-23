@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -8,18 +8,74 @@ import { Repository } from 'typeorm';
 @Injectable()
 export class UsersService {
   constructor(
-    // Respository- save,delete
+    // Respository- save,delete,update
     @InjectRepository(User)
     private repo:Repository<User>
   ){
 
   }
  // Partial- for example if we have 4 column in databasase user can enter less column.
-  create(data:Partial<User>){
+ //coz we have auto generate id.
+  create(data:Partial<CreateUserDto>){
     return this.repo.save(data);
   }
 
   findAll(){
-    return this.repo.find();
+    // profle from user entity
+    return this.repo.find({relations:['profile','posts']});
   }
+
+
+//   async findAll() {
+//   return this.repo.createQueryBuilder('user')
+//     .leftJoinAndSelect('user.profile', 'profile')
+//     .select([
+//       'user.id',
+//       'user.name', // add other user fields you want to include
+//       'profile.phone',
+//     ])
+//     .getMany();
+// }
+
+
+
+  // findOne(id:number){
+  //   const user=this.repo.findOneBy({id});
+
+  //   if(!user)throw new NotFoundException("User Not Found!");
+  //   return user;
+
+  // }
+
+  findOne(id:number){
+    const user=this.repo.findOne({where:{id},relations:['profile','posts']});
+    if(!user)throw new NotFoundException("User Not Found!");
+    return user;
+  }
+
+  async update(id:number,updateUserDto:UpdateUserDto){
+    const user=await this.repo.preload(
+      {
+        id:id,
+        ...updateUserDto,
+      }
+    );
+
+    if(!user) throw new NotFoundException("User Not Found");
+
+
+    return this.repo.save(user);
+
+  }
+
+
+
+  async remove(id:number){
+    const user=await this.repo.findOneBy({id:id});
+      if(!user) throw new NotFoundException("User Not Found");
+      return this.repo.delete(user);
+
+  }
+
+
 }

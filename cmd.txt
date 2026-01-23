@@ -15,6 +15,8 @@ nest g resource users
 dto-data transfer objects
 ui-> check dtype->
 ------------------------------
+    "typeorm": "typeorm-ts-node-commonjs -d src/data-source.ts",
+    "migration:revert": "npx typeorm-ts-node-commonjs migration:revert -d src/data-source.ts",
 npm install --save-dev ts-node tsconfig-paths
 
 npm run build
@@ -23,6 +25,11 @@ npm run typeorm migration:generate src/migrations/CreateUserTable
 
 npm run typeorm migration:run
 npm run typeorm migration:revert
+
+
+// drop migration on database
+
+
 
 
 
@@ -43,3 +50,8 @@ export const AppDataSource = new DataSource({
   synchronize: false,
 });
 ----------------------------------------------------------------------------------
+
+
+npm install class-validator class-transformer
+
+// Data modeling->DTO and Entity
