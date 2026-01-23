@@ -7,6 +7,7 @@ import { UsersModule } from './users/users.module';
 import { ProductsModule } from './products/products.module';
 import { ProfilesModule } from './profiles/profiles.module';
 import { PostsModule } from './posts/posts.module';
+import { TestBranchModule } from './test-branch/test-branch.module';
 
 
 
@@ -25,7 +26,8 @@ import { PostsModule } from './posts/posts.module';
     UsersModule,
     ProductsModule,
     ProfilesModule,
-    PostsModule
+    PostsModule,
+    TestBranchModule
     ],
   controllers: [AppController],
   providers: [AppService],
