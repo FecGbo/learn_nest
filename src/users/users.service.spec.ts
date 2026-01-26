@@ -31,6 +31,11 @@ describe('UsersService', () => {
 
   it('should create a user', async () => {
     const userDto = { name: 'Test User', email: 'test@example.com' };
+    const result = service.create(userDto);
+    expect(result).toBeInstanceOf(Promise);
+  });
+});
+
     const result = await service.create(userDto);
     expect(result).toEqual({ id: 1, ...userDto });
     expect(mockSave).toHaveBeenCalledWith(userDto);

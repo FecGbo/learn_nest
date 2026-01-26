@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsNumber, IsString } from "class-validator";
+import { IsArray, IsNotEmpty, IsNumber, IsOptional, IsString } from "class-validator";
 
 export class CreatePostDto {
     @IsString()
@@ -13,5 +13,13 @@ export class CreatePostDto {
     @IsNumber()
     @IsNotEmpty()
     userId:number;
+
+
+    @IsArray()
+    @IsOptional()
+    // check each index
+    @IsNumber({},{each:true})
+    
+    tagIds?:number[];
 
 }

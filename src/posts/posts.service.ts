@@ -20,18 +20,25 @@ export class PostsService {
 
 
   async create(createPostDto:Partial<CreatePostDto>) {
-    const {userId,...postDetail}=createPostDto;
+    const {userId,tagIds,...postDetail}=createPostDto;
     const user=await this.userRepo.findOne({where:{id:userId}});
       if (!user) {
-    throw new Error('User not found');
+    // throw new Error('User not found');
+    const error = new Error('User not found');
+    (error as any).status = 404;
+    throw error;
   }
+    //const tags=tagIds?.map((id)=>({id}))||[];
+    const tags=tagIds?.map((tagId)=>({id:tagId}))||[];
+
+
     const newPost=this.repo.create({
       ...postDetail,
       user:{id:userId} as any,
-
+      tags:tags
     })
 
-    return this.repo.save(newPost);
+    return await this.repo.save(newPost);
   }
 
   findAll() {
