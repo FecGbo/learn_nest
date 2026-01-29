@@ -55,3 +55,6 @@ export const AppDataSource = new DataSource({
 npm install class-validator class-transformer
 
 // Data modeling->DTO and Entity
+
+-------------------------------------Image---------------------------------
+npm install --save-dev @types/multer

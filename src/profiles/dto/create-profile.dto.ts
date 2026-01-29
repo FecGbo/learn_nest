@@ -8,4 +8,8 @@ export class CreateProfileDto {
     @IsString()
     @IsOptional()
     address:string;
+
+    @IsString()
+    @IsOptional()
+    image:string;
 }

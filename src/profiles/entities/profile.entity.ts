@@ -14,6 +14,9 @@ export class Profile {
   @Column()
   address:string
 
+  @Column({nullable:true})
+  image:string
+
  //on no foreignKey Side
   @OneToOne(()=>User,(user)=>user.profile)
   user:User

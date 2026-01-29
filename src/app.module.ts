@@ -28,7 +28,7 @@ import { TestBranchModule } from './test-branch/test-branch.module';
     ProductsModule,
     ProfilesModule,
     PostsModule,
-    TagsModule
+    TagsModule,
     TestBranchModule
     ],
   controllers: [AppController],
