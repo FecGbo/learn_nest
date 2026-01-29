@@ -31,4 +31,13 @@ export class ProfilesController {
   remove(@Param('id') id: string) {
     return this.profilesService.remove(+id);
   }
+
+
+//   @Patch(':id/profile-image')
+// async updateProfileImage(
+//   @Param('id') id: string,
+//   @Body('image') image: string
+// ) {
+//   return this.profilesService.updateProfileImage(+id, image);
+// }
 }

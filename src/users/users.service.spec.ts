@@ -36,8 +36,6 @@ describe('UsersService', () => {
   });
 });
 
-    const result = await service.create(userDto);
-    expect(result).toEqual({ id: 1, ...userDto });
-    expect(mockSave).toHaveBeenCalledWith(userDto);
-  });
-});
+
+
+

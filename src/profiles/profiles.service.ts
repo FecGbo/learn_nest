@@ -1,9 +1,24 @@
 import { Injectable } from '@nestjs/common';
 import { CreateProfileDto } from './dto/create-profile.dto';
 import { UpdateProfileDto } from './dto/update-profile.dto';
-
+import { InjectRepository } from '@nestjs/typeorm';
+import { Profile } from './entities/profile.entity';
+import { In, Repository } from 'typeorm';
+import { User } from 'src/users/entities/user.entity';
 @Injectable()
 export class ProfilesService {
+
+  constructor(
+    @InjectRepository(Profile)
+    private repo:Repository<Profile>,
+
+    @InjectRepository(User)
+    private userRepo:Repository<User>
+  ){
+   
+
+    
+  }
   create(createProfileDto: CreateProfileDto) {
     return 'This action adds a new profile';
   }
@@ -23,4 +38,8 @@ export class ProfilesService {
   remove(id: number) {
     return `This action removes a #${id} profile`;
   }
+   
+
+
+
 }

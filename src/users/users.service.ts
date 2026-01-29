@@ -22,7 +22,7 @@ export class UsersService {
 
   findAll(){
     // profle from user entity
-    return this.repo.find({relations:['profile','posts']});
+    return this.repo.find({relations:['profile','posts','posts.tags']});
   }
 
 
@@ -47,11 +47,11 @@ export class UsersService {
 
   // }
 
-  findOne(id:number){
-    const user=this.repo.findOne({where:{id},relations:['profile','posts']});
-    if(!user)throw new NotFoundException("User Not Found!");
-    return user;
-  }
+ async findOne(id: number) {
+  const user = await this.repo.findOne({ where: { id }, relations: ['profile', 'posts', 'posts.tags'] });
+  if (!user) throw new NotFoundException("User Not Found!");
+  return user;
+}
 
   async update(id:number,updateUserDto:UpdateUserDto){
     const user=await this.repo.preload(
@@ -78,4 +78,25 @@ export class UsersService {
   }
 
 
+  // async updateUserProfile(userId: number, profileData: Partial<CreateUserDto['profile']>) {
+  //   const user = await this.repo.findOne({ where: { id: userId }, relations: ['profile'] });
+  //   if (!user) {
+  //     throw new NotFoundException('User not found');
+  //   }
+  //   if (!user.profile) {
+  //     user.profile = this.repo.manager.create('Profile', profileData);
+  //   } else {
+  //     Object.assign(user.profile, profileData);
+  //   }
+  //   await this.repo.manager.save(user.profile);
+  //   return user.profile;
+  // }
+
+
+  async updateUserProfile(userId:number,filename:string){
+    const user=await this.findOne(userId);
+    user.profile.image=filename;
+    return this.repo.save(user);
+
+  }
 }
